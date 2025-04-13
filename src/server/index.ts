@@ -19,6 +19,14 @@ app.get(
   routeAdapter(makeListLeadsController())
 );
 
+app.post(
+  "/leads",
+  middlewareAdapter(makeAuthenticationMiddleware()),
+  (req, res) => {
+    res.json({ created: true });
+  }
+);
+
 app.listen(3001, () => {
   console.log("hello world");
 });
