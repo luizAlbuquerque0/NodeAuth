@@ -15,7 +15,7 @@ app.post("/sign-in", routeAdapter(makeSignInController()));
 
 app.get(
   "/leads",
-  middlewareAdapter(makeAuthenticationMiddleware),
+  middlewareAdapter(makeAuthenticationMiddleware()),
   routeAdapter(makeListLeadsController())
 );
 
