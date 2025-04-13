@@ -7,6 +7,6 @@ export interface IResponse {
   body: Record<string, any> | null;
 }
 
-export interface IControler {
+export interface IController {
   handle(request: IRequest): Promise<IResponse>;
 }
