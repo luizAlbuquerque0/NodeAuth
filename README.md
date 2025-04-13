@@ -28,11 +28,17 @@ This project is a minimal and fully decoupled authentication system built with N
 
 The system includes role-based access control (RBAC) to restrict access to certain routes based on user roles. Example usage:
 
-````ts
+```ts
 // Middleware usage example
-router.get('/admin/dashboard', authenticate, authorize(['admin']), (req, res) => {
-  res.send('Welcome, admin!');
-});
+router.get(
+  "/admin/dashboard",
+  authenticate,
+  authorize(["admin"]),
+  (req, res) => {
+    res.send("Welcome, admin!");
+  }
+);
+```
 
 ## 🚀 Getting Started
 
@@ -46,4 +52,4 @@ npm install
 
 # Run the development server
 npm run dev
-````
+```
