@@ -18,8 +18,21 @@ This project is a minimal and fully decoupled authentication system built with N
 
 - Basic user authentication (register/login)
 - JWT-based session handling
+- Role-Based Access Control (RBAC)
+  - Define roles (e.g. user, admin)
+  - Protect routes based on user role
 - Pluggable architecture with adapters
 - Ready to extend with OAuth, password resets, and more
+
+## 🔐 RBAC Overview
+
+The system includes role-based access control (RBAC) to restrict access to certain routes based on user roles. Example usage:
+
+````ts
+// Middleware usage example
+router.get('/admin/dashboard', authenticate, authorize(['admin']), (req, res) => {
+  res.send('Welcome, admin!');
+});
 
 ## 🚀 Getting Started
 
@@ -33,4 +46,4 @@ npm install
 
 # Run the development server
 npm run dev
-```
+````
