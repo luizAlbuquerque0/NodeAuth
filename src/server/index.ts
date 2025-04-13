@@ -5,6 +5,7 @@ import { routeAdapter } from "./adapters/routeAdapter";
 import { makeListLeadsController } from "../factories/MakeListLeadsController";
 import { middlewareAdapter } from "./adapters/middlewareAdapter";
 import { makeAuthenticationMiddleware } from "../factories/makeAuthenticationMiddleware";
+import { makeAuthorizationMiddleware } from "../factories/makeAuthorizationMiddleware";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.get(
 app.post(
   "/leads",
   middlewareAdapter(makeAuthenticationMiddleware()),
+  middlewareAdapter(makeAuthorizationMiddleware(["ADMIN"])),
   (req, res) => {
     res.json({ created: true });
   }

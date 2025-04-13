@@ -1,7 +1,8 @@
-import { IController, IRequest, IResponse } from "../interfaces/IController";
+import { IController, IResponse } from "../interfaces/IController";
 import { z, ZodError } from "zod";
 import { SignInUseCase } from "../useCases/SignInUseCase";
 import { InvalidCredetials } from "../errors/InvalidCredetials";
+import { IRequest } from "../interfaces/IRequest";
 
 const schema = z.object({
   email: z.string().email(),
