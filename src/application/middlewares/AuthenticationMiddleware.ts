@@ -24,7 +24,7 @@ export class AuthenticationMiddleware implements IMiddleware {
     try {
       const [bearer, token] = authorization.split(" ");
       if (bearer !== "Bearer") {
-        throw new error();
+        throw error;
       }
 
       const { sub } = verify(token, env.jwtSecret);
