@@ -18,11 +18,25 @@ This project is a minimal and fully decoupled authentication system built with N
 
 - Basic user authentication (register/login)
 - JWT-based session handling
+- Refresh Token with **Rotation** mechanism
+  - New refresh token is issued on every use
+  - Old refresh tokens are invalidated immediately after use
+  - Mitigates token theft and replay attacks
 - Role-Based Access Control (RBAC)
   - Define roles (e.g. user, admin)
   - Protect routes based on user role
 - Pluggable architecture with adapters
 - Ready to extend with OAuth, password resets, and more
+
+## 🔁 Refresh Token Rotation
+
+Refresh Token Rotation increases security by ensuring that each refresh token is valid for only **one use**. Every time the client uses a refresh token to get a new access token:
+
+1. The server verifies and **invalidates the current refresh token**.
+2. A **new refresh token** is generated and sent to the client.
+3. If a stolen refresh token is reused, it will already be invalid, preventing replay attacks.
+
+This pattern is particularly effective against scenarios where refresh tokens might be leaked or stolen.
 
 ## 🔐 RBAC Overview
 
