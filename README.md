@@ -58,10 +58,10 @@ router.get(
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/luizAlbuquerque0/NodeAuth.git
 
 # Install dependencies
-cd your-repo-name
+cd NodeAuth
 npm install
 
 # Run the development server
