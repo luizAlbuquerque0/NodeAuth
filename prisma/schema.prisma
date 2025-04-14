@@ -15,11 +15,23 @@ enum Role {
 }
 
 model Account {
-  id       String @id @default(uuid()) @db.Uuid
-  name     String
-  email    String @unique
-  password String
-  role     Role
+  id           String         @id @default(uuid()) @db.Uuid
+  name         String
+  email        String         @unique
+  password     String
+  role         Role
+  RefreshToken RefreshToken[]
 
   @@map("accounts")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  accountId String   @db.Uuid
+  issuedAt  DateTime @default(now())
+  expiresAt DateTime
+
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
 }

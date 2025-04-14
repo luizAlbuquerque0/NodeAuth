@@ -12,6 +12,7 @@ interface IInput {
 
 type IOutput = {
   accessToken: string;
+  accountId: string;
 };
 
 export class SignInUseCase {
@@ -39,6 +40,7 @@ export class SignInUseCase {
 
     return {
       accessToken,
+      accountId: account.id,
     };
   }
 }

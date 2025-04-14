@@ -3,6 +3,8 @@ import { z, ZodError } from "zod";
 import { SignInUseCase } from "../useCases/SignInUseCase";
 import { InvalidCredetials } from "../errors/InvalidCredetials";
 import { IRequest } from "../interfaces/IRequest";
+import { EXP_TIME_IN_DAYS } from "../config/contants";
+import { CreateRefreshtokenUseCase } from "../useCases/CreateRefreshToken";
 
 const schema = z.object({
   email: z.string().email(),
@@ -10,20 +12,34 @@ const schema = z.object({
 });
 
 export class SignInController implements IController {
-  constructor(private readonly signInUseCase: SignInUseCase) {}
+  constructor(
+    private readonly signInUseCase: SignInUseCase,
+    private readonly createRefreshToken: CreateRefreshtokenUseCase
+  ) {}
   async handle({ body }: IRequest): Promise<IResponse> {
     try {
       const { email, password } = schema.parse(body);
 
-      const { accessToken } = await this.signInUseCase.execute({
+      const { accessToken, accountId } = await this.signInUseCase.execute({
         email,
         password,
+      });
+
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + EXP_TIME_IN_DAYS);
+
+      const {
+        refreshToken: { id },
+      } = await this.createRefreshToken.execute({
+        accountId,
+        expiresAt,
       });
 
       return {
         statusCode: 200,
         body: {
           accessToken,
+          refreshToken: id,
         },
       };
     } catch (error) {
