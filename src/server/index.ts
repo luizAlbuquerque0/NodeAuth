@@ -7,9 +7,11 @@ import { middlewareAdapter } from "./adapters/middlewareAdapter";
 import { makeAuthenticationMiddleware } from "../factories/makeAuthenticationMiddleware";
 import { makeAuthorizationMiddleware } from "../factories/makeAuthorizationMiddleware";
 import { makeRefreshTokenController } from "../factories/makeRefreshTokenController";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.post("/sign-up", routeAdapter(makeSignUpController()));

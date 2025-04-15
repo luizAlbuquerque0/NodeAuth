@@ -62,7 +62,7 @@ export class RefreshTokenController implements IController {
         { sub: refreshToken.accountId, role: refreshToken.account.role },
         env.jwtSecret,
         {
-          expiresIn: "1d",
+          expiresIn: "10s",
         }
       ),
       this.createRefreshToken.execute({
