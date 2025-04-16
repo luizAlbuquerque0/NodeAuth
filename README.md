@@ -25,8 +25,12 @@ This project is a minimal and fully decoupled authentication system built with N
 - Role-Based Access Control (RBAC)
   - Define roles (e.g. user, admin)
   - Protect routes based on user role
+- **Google Social Login via OAuth2**
+  - Authenticate users using their Google account
+  - Secure OAuth2 flow handled via a dedicated adapter
+  - Integrates seamlessly with existing session/token infrastructure
 - Pluggable architecture with adapters
-- Ready to extend with OAuth, password resets, and more
+- Ready to extend with additional providers, password resets, and more
 
 ## 🔁 Refresh Token Rotation
 
