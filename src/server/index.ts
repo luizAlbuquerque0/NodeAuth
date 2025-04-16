@@ -8,6 +8,7 @@ import { makeAuthenticationMiddleware } from "../factories/makeAuthenticationMid
 import { makeAuthorizationMiddleware } from "../factories/makeAuthorizationMiddleware";
 import { makeRefreshTokenController } from "../factories/makeRefreshTokenController";
 import cors from "cors";
+import { makeGoogleSignInController } from "../factories/makeGoogleSignInController";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.post("/sign-up", routeAdapter(makeSignUpController()));
 app.post("/sign-in", routeAdapter(makeSignInController()));
 app.post("/refresh-token", routeAdapter(makeRefreshTokenController()));
+app.post("/auth/google", routeAdapter(makeGoogleSignInController()));
 
 app.get(
   "/leads",

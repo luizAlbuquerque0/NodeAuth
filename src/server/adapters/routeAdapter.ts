@@ -8,6 +8,7 @@ export function routeAdapter(controller: IController) {
       params: request.params,
       account: request.metadata?.account,
       headers: request.headers as Record<string, string>,
+      query: request.query,
     });
 
     response.status(statusCode).json(body);

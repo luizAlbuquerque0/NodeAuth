@@ -21,11 +21,11 @@ export class SignInUseCase {
       where: { email },
     });
 
-    if (!account) {
+    if (!account || !account.password) {
       throw new InvalidCredetials();
     }
 
-    const isPasswordValid = await compare(password, account.password);
+    const isPasswordValid = await compare(password, account.password!);
     if (!isPasswordValid) {
       throw new InvalidCredetials();
     }
@@ -34,7 +34,7 @@ export class SignInUseCase {
       { sub: account.id, role: account.role },
       env.jwtSecret,
       {
-        expiresIn: "10s",
+        expiresIn: "1d",
       }
     );
 
