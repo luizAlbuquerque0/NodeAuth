@@ -9,6 +9,7 @@ import { makeAuthorizationMiddleware } from "../factories/makeAuthorizationMiddl
 import { makeRefreshTokenController } from "../factories/makeRefreshTokenController";
 import cors from "cors";
 import { makeGoogleSignInController } from "../factories/makeGoogleSignInController";
+import { MakeGetAccountInfoController } from "../factories/MakeGetAccountInfoController";
 
 const app = express();
 
@@ -19,6 +20,12 @@ app.post("/sign-up", routeAdapter(makeSignUpController()));
 app.post("/sign-in", routeAdapter(makeSignInController()));
 app.post("/refresh-token", routeAdapter(makeRefreshTokenController()));
 app.post("/auth/google", routeAdapter(makeGoogleSignInController()));
+
+app.get(
+  "/me",
+  middlewareAdapter(makeAuthenticationMiddleware()),
+  routeAdapter(MakeGetAccountInfoController())
+);
 
 app.get(
   "/leads",
